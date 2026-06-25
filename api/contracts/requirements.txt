@@ -1,0 +1,12 @@
+# Dependencias para el módulo de contratos
+
+# Generación de PDFs desde HTML
+weasyprint>=60.1
+
+# Cálculo de fechas (para amortización)
+python-dateutil>=2.8.2
+
+# Nota: WeasyPrint requiere dependencias del sistema:
+# - Windows: Descargar GTK3 runtime desde https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer
+# - Linux: sudo apt-get install python3-cffi python3-brotli libpango-1.0-0 libpangoft2-1.0-0
+# - macOS: brew install python3 cairo pango gdk-pixbuf libffi

@@ -1,0 +1,3 @@
+"""
+Management commands para contratos
+"""

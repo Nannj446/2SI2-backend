@@ -1,0 +1,23 @@
+{% extends "emails/base.html" %}
+
+{% block title %}Email de Prueba - Sistema Bancario{% endblock %}
+
+{% block header_title %}Email de Prueba{% endblock %}
+
+{% block content %}
+<h2>¡Hola{{ name|default:"" }}!</h2>
+
+<p>Este es un email de prueba del sistema de autenticación.</p>
+
+<div class="info-box">
+    <p><strong>Configuración de Brevo SMTP:</strong></p>
+    <p>✅ El sistema de emails está funcionando correctamente.</p>
+</div>
+
+<p>Si recibiste este email, significa que la integración con Brevo SMTP está configurada correctamente.</p>
+
+<div class="divider"></div>
+
+<p>Saludos,<br>
+<strong>Equipo de Sistema Bancario</strong></p>
+{% endblock %}

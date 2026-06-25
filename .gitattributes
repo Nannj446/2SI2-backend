@@ -1,0 +1,16 @@
+# Asegurar que scripts shell usen LF (Unix) en lugar de CRLF (Windows)
+*.sh text eol=lf
+
+# Asegurar que archivos Python usen el line ending del sistema
+*.py text
+
+# Archivos binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary

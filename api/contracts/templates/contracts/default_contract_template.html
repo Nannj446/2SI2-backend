@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Crédito - {{contract_number}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .contract-number {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .parties {
+            margin: 20px 0;
+        }
+        .party {
+            margin-bottom: 15px;
+        }
+        .party-label {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .terms-table th,
+        .terms-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .clause {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .clause-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .signatures {
+            margin-top: 60px;
+            page-break-inside: avoid;
+        }
+        .signature-block {
+            display: inline-block;
+            width: 45%;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            margin: 0 auto 5px auto;
+            width: 200px;
+        }
+        .signature-label {
+            font-size: 10pt;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 9pt;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <div class="header">
+        <h1>CONTRATO DE CRÉDITO</h1>
+        <div class="contract-number">No. {{contract_number}}</div>
+        <p><strong>{{institution_name}}</strong></p>
+        <p>{{institution_address}}</p>
+        <p>NIT: {{institution_nit}}</p>
+    </div>
+
+    <!-- PARTES DEL CONTRATO -->
+    <div class="section">
+        <div class="section-title">Partes Contratantes</div>
+        
+        <div class="parties">
+            <div class="party">
+                <p class="party-label">El Acreedor:</p>
+                <p>
+                    <strong>{{institution_name}}</strong>, institución financiera legalmente constituida,
+                    con NIT {{institution_nit}}, domiciliada en {{institution_address}},
+                    en adelante denominada "LA INSTITUCIÓN" o "EL ACREEDOR".
+                </p>
+            </div>
+            
+            <div class="party">
+                <p class="party-label">El Deudor:</p>
+                <p>
+                    <strong>{{borrower_name}}</strong>, con documento de identidad {{borrower_document}},
+                    domiciliado en {{borrower_address}}, en adelante denominado "EL PRESTATARIO" o "EL DEUDOR".
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANTECEDENTES -->
+    <div class="section">
+        <div class="section-title">Antecedentes</div>
+        <div class="clause">
+            <p>
+                EL PRESTATARIO ha solicitado a LA INSTITUCIÓN un crédito para {{product_name}},
+                y LA INSTITUCIÓN ha evaluado y aprobado dicha solicitud conforme a sus políticas
+                y procedimientos internos.
+            </p>
+        </div>
+    </div>
+
+    <!-- TÉRMINOS DEL CRÉDITO -->
+    <div class="section">
+        <div class="section-title">Términos y Condiciones del Crédito</div>
+        
+        <table class="terms-table">
+            <tr>
+                <th>Concepto</th>
+                <th>Detalle</th>
+            </tr>
+            <tr>
+                <td><strong>Monto del Crédito</strong></td>
+                <td>{{principal_amount}}</td>
+            </tr>
+            <tr>
+                <td><strong>Tasa de Interés Anual</strong></td>
+                <td>{{interest_rate}}</td>
+            </tr>
+            <tr>
+                <td><strong>Plazo</strong></td>
+                <td>{{term_months}} meses</td>
+            </tr>
+            <tr>
+                <td><strong>Cuota Mensual</strong></td>
+                <td>{{monthly_payment}}</td>
+            </tr>
+            <tr>
+                <td><strong>Monto Total a Pagar</strong></td>
+                <td>{{total_amount}}</td>
+            </tr>
+            <tr>
+                <td><strong>Fecha de Inicio</strong></td>
+                <td>{{start_date}}</td>
+            </tr>
+            <tr>
+                <td><strong>Fecha de Finalización</strong></td>
+                <td>{{end_date}}</td>
+            </tr>
+            <tr>
+                <td><strong>Primer Pago</strong></td>
+                <td>{{first_payment_date}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- CLÁUSULAS -->
+    <div class="section">
+        <div class="section-title">Cláusulas</div>
+        
+        <div class="clause">
+            <p class="clause-title">PRIMERA.- OBJETO DEL CONTRATO</p>
+            <p>
+                Por el presente contrato, LA INSTITUCIÓN otorga a EL PRESTATARIO un crédito
+                por la suma de {{principal_amount}}, que EL PRESTATARIO se obliga a devolver
+                en {{term_months}} cuotas mensuales de {{monthly_payment}} cada una, más los
+                intereses correspondientes a la tasa de {{interest_rate}} anual.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">SEGUNDA.- DESEMBOLSO</p>
+            <p>
+                LA INSTITUCIÓN se compromete a desembolsar el monto del crédito aprobado
+                dentro de los 5 días hábiles siguientes a la firma del presente contrato,
+                mediante transferencia bancaria a la cuenta designada por EL PRESTATARIO.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">TERCERA.- FORMA DE PAGO</p>
+            <p>
+                EL PRESTATARIO se obliga a pagar {{term_months}} cuotas mensuales consecutivas
+                de {{monthly_payment}} cada una, venciendo la primera cuota el día {{first_payment_date}}
+                y las subsiguientes el mismo día de cada mes hasta completar el plazo establecido.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">CUARTA.- INTERESES</p>
+            <p>
+                El crédito devengará intereses a la tasa de {{interest_rate}} anual sobre saldos
+                deudores. Los intereses se calcularán sobre el saldo de capital pendiente de pago
+                y se incluyen en cada cuota mensual.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">QUINTA.- MORA</p>
+            <p>
+                En caso de mora en el pago de cualquier cuota, EL PRESTATARIO pagará intereses
+                moratorios sobre el monto vencido y no pagado, a una tasa equivalente al 150%
+                de la tasa de interés ordinaria, sin perjuicio de las demás acciones legales
+                que correspondan a LA INSTITUCIÓN.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">SEXTA.- PAGO ANTICIPADO</p>
+            <p>
+                EL PRESTATARIO podrá realizar pagos anticipados totales o parciales del crédito
+                en cualquier momento, sin penalización alguna. Los pagos anticipados se aplicarán
+                primero a intereses devengados y luego a capital.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">SÉPTIMA.- OBLIGACIONES DEL PRESTATARIO</p>
+            <p>
+                EL PRESTATARIO se obliga a:
+            </p>
+            <ul>
+                <li>Pagar puntualmente las cuotas mensuales en las fechas establecidas.</li>
+                <li>Mantener actualizados sus datos de contacto ante LA INSTITUCIÓN.</li>
+                <li>Informar inmediatamente cualquier cambio en su situación económica o laboral.</li>
+                <li>Destinar el crédito al propósito declarado en la solicitud.</li>
+                <li>No ceder ni transferir los derechos y obligaciones del presente contrato sin autorización escrita de LA INSTITUCIÓN.</li>
+            </ul>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">OCTAVA.- CAUSALES DE VENCIMIENTO ANTICIPADO</p>
+            <p>
+                LA INSTITUCIÓN podrá declarar vencido anticipadamente el plazo del crédito y exigir
+                el pago inmediato del saldo total adeudado en los siguientes casos:
+            </p>
+            <ul>
+                <li>Mora en el pago de dos o más cuotas consecutivas.</li>
+                <li>Falsedad en la información proporcionada por EL PRESTATARIO.</li>
+                <li>Deterioro significativo de la situación económica de EL PRESTATARIO.</li>
+                <li>Incumplimiento de cualquiera de las obligaciones establecidas en este contrato.</li>
+            </ul>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">NOVENA.- DOMICILIO Y NOTIFICACIONES</p>
+            <p>
+                Para todos los efectos legales derivados del presente contrato, las partes señalan
+                como sus domicilios los indicados en el encabezado de este documento. Cualquier
+                notificación se realizará a dichos domicilios o a las direcciones de correo
+                electrónico registradas.
+            </p>
+        </div>
+        
+        <div class="clause">
+            <p class="clause-title">DÉCIMA.- JURISDICCIÓN Y LEY APLICABLE</p>
+            <p>
+                Para la interpretación y cumplimiento del presente contrato, las partes se someten
+                a la jurisdicción de los tribunales competentes, renunciando expresamente a cualquier
+                otro fuero que pudiera corresponderles.
+            </p>
+        </div>
+    </div>
+
+    <!-- ACEPTACIÓN -->
+    <div class="section">
+        <p>
+            En señal de conformidad y aceptación de todos los términos y condiciones establecidos
+            en el presente contrato, las partes lo suscriben en la ciudad de ____________,
+            a los {{contract_date}}.
+        </p>
+    </div>
+
+    <!-- FIRMAS -->
+    <div class="signatures">
+        <div class="signature-block" style="float: left;">
+            <div class="signature-line"></div>
+            <p class="signature-label">
+                <strong>LA INSTITUCIÓN</strong><br>
+                {{institution_name}}<br>
+                Representante Legal
+            </p>
+        </div>
+        
+        <div class="signature-block" style="float: right;">
+            <div class="signature-line"></div>
+            <p class="signature-label">
+                <strong>EL PRESTATARIO</strong><br>
+                {{borrower_name}}<br>
+                C.I. {{borrower_document}}
+            </p>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="footer">
+        <p>
+            Este documento ha sido generado electrónicamente y tiene plena validez legal.<br>
+            Contrato No. {{contract_number}} | Fecha: {{contract_date}}
+        </p>
+    </div>
+</body>
+</html>

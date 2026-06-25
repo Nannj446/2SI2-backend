@@ -1,0 +1,40 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h2 style="color: #333; margin-bottom: 20px;">Código de Verificación</h2>
+
+<p style="color: #666; font-size: 16px; line-height: 1.6;">
+    Hola <strong>{{ user_name }}</strong>,
+</p>
+
+<p style="color: #666; font-size: 16px; line-height: 1.6;">
+    Has solicitado iniciar sesión en tu cuenta. Para continuar, ingresa el siguiente código de verificación:
+</p>
+
+<div style="background: #f5f5f5; border-radius: 8px; padding: 30px; margin: 30px 0; text-align: center;">
+    <div style="font-size: 42px; font-weight: bold; color: #2563eb; letter-spacing: 2px; font-family: 'Courier New', monospace; user-select: all;">
+        {{ code }}
+    </div>
+    <p style="color: #666; font-size: 12px; margin-top: 15px;">
+        Haz clic en el código para seleccionarlo y copiarlo
+    </p>
+</div>
+
+<p style="color: #666; font-size: 16px; line-height: 1.6;">
+    Este código expira en <strong style="color: #dc2626;">{{ expires_in }} minutos</strong>.
+</p>
+
+<p style="color: #666; font-size: 16px; line-height: 1.6;">
+    Tienes un máximo de <strong>3 intentos</strong> para ingresar el código correcto.
+</p>
+
+<div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 4px;">
+    <p style="color: #92400e; font-size: 14px; margin: 0;">
+        <strong>⚠️ Importante:</strong> Si no solicitaste este código, ignora este mensaje y considera cambiar tu contraseña.
+    </p>
+</div>
+
+<p style="color: #999; font-size: 14px; margin-top: 30px;">
+    Este es un mensaje automático, por favor no respondas a este correo.
+</p>
+{% endblock %}

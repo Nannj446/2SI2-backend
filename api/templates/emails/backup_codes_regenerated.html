@@ -1,0 +1,75 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h1 style="color: #333333; font-size: 24px; margin-bottom: 20px;">Códigos de respaldo regenerados</h1>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Hola {{ user_name }},
+</p>
+
+<div style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #155724; font-size: 16px; margin: 0;">
+        <strong>✓ Confirmación:</strong> Tus códigos de respaldo de autenticación de dos factores han sido regenerados exitosamente.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Los códigos anteriores ya no son válidos. Guarda estos nuevos códigos en un lugar seguro:
+</p>
+
+<div style="background-color: #f8f9fa; border: 2px solid #dee2e6; border-radius: 5px; padding: 20px; margin-bottom: 20px; font-family: 'Courier New', monospace;">
+    {% for code in backup_codes %}
+    <p style="color: #333333; font-size: 16px; margin: 8px 0; font-weight: bold;">
+        {{ forloop.counter }}. {{ code }}
+    </p>
+    {% endfor %}
+</div>
+
+<div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #856404; font-size: 14px; margin: 0;">
+        <strong>⚠️ Importante:</strong> Cada código de respaldo solo puede usarse una vez. Guárdalos en un lugar seguro y no los compartas con nadie.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    <strong>¿Cuándo usar estos códigos?</strong>
+</p>
+
+<ul style="color: #666666; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+    <li>Si pierdes acceso a tu aplicación de autenticación</li>
+    <li>Si cambias de teléfono y no puedes transferir la configuración</li>
+    <li>En caso de emergencia cuando no puedas generar un código TOTP</li>
+</ul>
+
+<div style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #721c24; font-size: 14px; margin: 0;">
+        <strong>¿No fuiste tú?</strong> Si no regeneraste estos códigos, tu cuenta podría estar comprometida. Cambia tu contraseña inmediatamente y contacta con soporte.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    <strong>Recomendaciones:</strong>
+</p>
+
+<ul style="color: #666666; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+    <li>Imprime estos códigos y guárdalos en un lugar seguro</li>
+    <li>O guárdalos en un gestor de contraseñas cifrado</li>
+    <li>No los guardes en archivos de texto sin cifrar</li>
+    <li>No los compartas por email o mensajes</li>
+</ul>
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+    <tr>
+        <td align="center">
+            <a href="{{ frontend_url }}/settings/security" 
+               style="display: inline-block; padding: 15px 40px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                Ver configuración de seguridad
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="color: #999999; font-size: 14px; line-height: 1.5;">
+    Este es un mensaje automático de seguridad. Si tienes preguntas, contacta con nuestro equipo de soporte.
+</p>
+{% endblock %}

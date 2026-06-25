@@ -1,0 +1,88 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h1 style="color: #333333; font-size: 24px; margin-bottom: 20px;">Cuenta bloqueada temporalmente</h1>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Hola {{ user_name }},
+</p>
+
+<div style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #721c24; font-size: 16px; margin: 0;">
+        <strong>⚠️ Alerta de seguridad:</strong> Tu cuenta ha sido bloqueada temporalmente debido a múltiples intentos fallidos de inicio de sesión.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Detectamos {{ failed_attempts }} intentos fallidos de inicio de sesión en tu cuenta.
+</p>
+
+<table style="width: 100%; background-color: #f8f9fa; border-radius: 5px; padding: 15px; margin-bottom: 20px;">
+    <tr>
+        <td style="padding: 5px 0;">
+            <strong style="color: #333333;">Intentos fallidos:</strong>
+            <span style="color: #666666;">{{ failed_attempts }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 5px 0;">
+            <strong style="color: #333333;">Tiempo de bloqueo:</strong>
+            <span style="color: #666666;">{{ lockout_minutes }} minutos</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 5px 0;">
+            <strong style="color: #333333;">IP de origen:</strong>
+            <span style="color: #666666;">{{ ip_address }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 5px 0;">
+            <strong style="color: #333333;">Fecha y hora:</strong>
+            <span style="color: #666666;">{{ attempted_at }}</span>
+        </td>
+    </tr>
+</table>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Por tu seguridad, tu cuenta estará bloqueada durante <strong>{{ lockout_minutes }} minutos</strong>. Después de este tiempo, podrás intentar iniciar sesión nuevamente.
+</p>
+
+<div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #856404; font-size: 14px; margin: 0;">
+        <strong>¿Fuiste tú?</strong> Si reconoces estos intentos, simplemente espera {{ lockout_minutes }} minutos e intenta nuevamente con tu contraseña correcta.
+    </p>
+</div>
+
+<div style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #721c24; font-size: 14px; margin: 0;">
+        <strong>¿No fuiste tú?</strong> Si no reconoces estos intentos, tu cuenta podría estar siendo atacada. Te recomendamos:
+    </p>
+</div>
+
+<ul style="color: #666666; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+    <li>Cambiar tu contraseña inmediatamente después del desbloqueo</li>
+    <li>Usar una contraseña única y segura</li>
+    <li>Habilitar autenticación de dos factores (2FA)</li>
+    <li>Contactar con soporte si sospechas actividad no autorizada</li>
+</ul>
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+    <tr>
+        <td align="center">
+            <a href="{{ frontend_url }}/reset-password" 
+               style="display: inline-block; padding: 15px 40px; background-color: #dc3545; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                Cambiar contraseña
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="color: #999999; font-size: 14px; line-height: 1.5; margin-bottom: 10px;">
+    Este es un mensaje automático de seguridad. Si tienes preguntas, contacta con nuestro equipo de soporte.
+</p>
+
+<p style="color: #999999; font-size: 12px; line-height: 1.5;">
+    <strong>Nota:</strong> Nunca compartas tu contraseña con nadie. Nuestro equipo nunca te pedirá tu contraseña por email o teléfono.
+</p>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h1 style="color: #333333; font-size: 24px; margin-bottom: 20px;">Autenticación de dos factores deshabilitada</h1>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    Hola {{ user_name }},
+</p>
+
+<div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #856404; font-size: 16px; margin: 0;">
+        <strong>⚠️ Cambio de seguridad:</strong> La autenticación de dos factores (2FA) ha sido deshabilitada en tu cuenta.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    A partir de ahora, solo necesitarás tu contraseña para iniciar sesión.
+</p>
+
+<div style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin-bottom: 20px;">
+    <p style="color: #721c24; font-size: 14px; margin: 0;">
+        <strong>¿No fuiste tú?</strong> Si no deshabilitaste 2FA, tu cuenta podría estar comprometida. Cambia tu contraseña inmediatamente y contacta con soporte.
+    </p>
+</div>
+
+<p style="color: #666666; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+    <strong>Recomendaciones de seguridad:</strong>
+</p>
+
+<ul style="color: #666666; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+    <li>Considera volver a habilitar 2FA para mayor seguridad</li>
+    <li>Usa una contraseña única y segura</li>
+    <li>No compartas tu contraseña con nadie</li>
+    <li>Revisa la actividad reciente de tu cuenta</li>
+</ul>
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+    <tr>
+        <td align="center">
+            <a href="{{ frontend_url }}/settings/security" 
+               style="display: inline-block; padding: 15px 40px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                Volver a habilitar 2FA
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="color: #999999; font-size: 14px; line-height: 1.5;">
+    Este es un mensaje automático de seguridad. Si tienes preguntas, contacta con nuestro equipo de soporte.
+</p>
+{% endblock %}
