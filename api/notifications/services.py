@@ -70,8 +70,29 @@ class FirebaseMessagingService:
             client_email = os.environ.get('FIREBASE_CLIENT_EMAIL')
             
             if project_id and private_key and client_email:
-                # Convertir escapes \n (backslash+n) a saltos de línea reales
+                # Limpiar y normalizar la clave privada
+                # 1. Remover comillas externas que Railway a veces agrega
+                private_key = private_key.strip().strip('"').strip("'")
+                # 2. Reemplazar \\n literal (dos caracteres) por saltos de linea reales
                 private_key = private_key.replace('\\n', '\n')
+                # 3. Reemplazar \r\n si existiera
+                private_key = private_key.replace('\r\n', '\n')
+                # 4. Asegurar que BEGIN y END esten en lineas separadas
+                if not private_key.startswith('-----BEGIN'):
+                    logger.error(
+                        "FirebaseMessagingService: La clave privada no comienza con "
+                        "'-----BEGIN PRIVATE KEY-----'. Verificar formato en variables de entorno."
+                    )
+                if '-----END' not in private_key:
+                    logger.error(
+                        "FirebaseMessagingService: La clave privada no contiene "
+                        "'-----END PRIVATE KEY-----'. Verificar formato en variables de entorno."
+                    )
+                
+                logger.info(
+                    f"FirebaseMessagingService: Intentando inicializar con project_id={project_id}, "
+                    f"client_email={client_email}"
+                )
                 
                 creds_dict = {
                     'type': 'service_account',

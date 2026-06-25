@@ -8,6 +8,7 @@ Uso:
 from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
 from api.contracts.models import ContractTemplate
+from api.products.models import CreditProduct
 from api.tenants.models import FinancialInstitution
 
 
@@ -127,6 +128,17 @@ TÉRMINOS Y CONDICIONES GENERALES
             },
         ]
 
+        # Buscar un producto existente para asociar la plantilla
+        product = CreditProduct.objects.filter(institution=institution).first()
+        if not product:
+            self.stdout.write(
+                self.style.ERROR(
+                    f'La institucion {institution.name} no tiene productos. '
+                    f'Cree un producto primero o ejecute populate_tenant_data.'
+                )
+            )
+            return
+
         if existing and force:
             # Actualizar plantilla existente
             existing.template_content = template_content
@@ -144,7 +156,8 @@ TÉRMINOS Y CONDICIONES GENERALES
             # Crear nueva plantilla
             template = ContractTemplate.objects.create(
                 institution=institution,
-                name='Plantilla de Contrato Estándar',
+                product=product,
+                name='Plantilla de Contrato Estandar',
                 code='DEFAULT_TEMPLATE',
                 template_content=template_content,
                 available_variables=available_variables,
@@ -153,7 +166,7 @@ TÉRMINOS Y CONDICIONES GENERALES
                 requires_guarantor_signature=False,
                 terms_and_conditions=terms_and_conditions,
                 legal_clauses=legal_clauses,
-                description='Plantilla de contrato estándar para créditos generales',
+                description='Plantilla estandar para creditos generales',
                 version='1.0'
             )
 
