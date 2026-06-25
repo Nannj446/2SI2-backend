@@ -359,18 +359,34 @@ class RegisterTokenView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
-        push_token, created = PushToken.objects.update_or_create(
-            token=token,
-            defaults={
-                'user': request.user,
-                'institution': getattr(request, 'tenant', None),
-                'device_type': device_type,
-                'device_name': device_name,
-                'device_id': device_id,
-                'is_active': True,
-                'last_used_at': timezone.now(),
-            }
-        )
+        from django.db import IntegrityError
+        try:
+            push_token, created = PushToken.objects.update_or_create(
+                token=token,
+                defaults={
+                    'user': request.user,
+                    'institution': getattr(request, 'tenant', None),
+                    'device_type': device_type,
+                    'device_name': device_name,
+                    'device_id': device_id,
+                    'is_active': True,
+                    'last_used_at': timezone.now(),
+                }
+            )
+        except IntegrityError:
+            # El token ya existe activo para otro usuario/tenant, reasignarlo
+            PushToken.objects.filter(token=token, is_active=True).update(is_active=False)
+            push_token = PushToken.objects.create(
+                token=token,
+                user=request.user,
+                institution=getattr(request, 'tenant', None),
+                device_type=device_type,
+                device_name=device_name,
+                device_id=device_id,
+                is_active=True,
+                last_used_at=timezone.now(),
+            )
+            created = True
 
         return Response(
             PushTokenSerializer(push_token).data,
