@@ -1,11 +1,10 @@
+from django.conf import settings
 from django.urls import include, path
 
 from .views import health_check
-from .utils.debug_views import DebugPermissionsView
 
 urlpatterns = [
     path('health/', health_check, name='health-check'),
-    path('debug/permissions/', DebugPermissionsView.as_view(), name='debug-permissions'),
     path('', include('api.registration.urls')),
     path('', include('api.authentication.urls')),
     # Parte erick sprint 0
@@ -47,4 +46,10 @@ urlpatterns = [
     # CU-14: Gestión de Seguros Asociados al Crédito
     path('insurances/', include('api.insurances.urls')),
 ]
+
+if settings.DEBUG:
+    from .utils.debug_views import DebugPermissionsView
+    urlpatterns.append(
+        path('debug/permissions/', DebugPermissionsView.as_view(), name='debug-permissions')
+    )
 
